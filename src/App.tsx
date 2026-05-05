@@ -1509,32 +1509,32 @@ export default function App() {
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                className={`relative w-full max-w-md rounded-[2.5rem] overflow-hidden border shadow-2xl ${clientTheme === 'dark' ? 'bg-zinc-900 border-zinc-800' : 'bg-slate-900 border-zinc-800'}`}
+                className="relative w-full max-w-md rounded-2xl overflow-hidden border shadow-2xl bg-[#1a1a1a] border-zinc-800"
               >
-                <div className="p-8">
+                <div className="p-6">
                   {/* Header */}
-                  <div className="flex items-center justify-between mb-8">
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-500">
-                        <Wallet size={24} />
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-emerald-500 flex items-center justify-center">
+                        <Wallet size={20} className="text-white" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-black text-white">Add Balance</h3>
-                        <p className="text-zinc-500 text-xs font-medium">Current balance: $ 40.00</p>
+                        <h3 className="text-base font-bold text-white">Adicionar Saldo</h3>
+                        <p className="text-zinc-500 text-xs">Saldo atual: R$ 40,00</p>
                       </div>
                     </div>
                     <button 
                       onClick={() => setShowAddBalanceModal(false)}
-                      className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white transition-colors"
+                      className="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white transition-colors"
                     >
-                      <X size={20} />
+                      <X size={16} />
                     </button>
                   </div>
 
                   {/* Select Amount */}
-                  <div className="space-y-4 mb-8">
-                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">Select Amount</p>
-                    <div className="grid grid-cols-3 gap-3">
+                  <div className="space-y-3 mb-6">
+                    <p className="text-sm font-medium text-white">Selecionar Valor</p>
+                    <div className="grid grid-cols-3 gap-2">
                       {[10, 25, 50, 100, 250, 500].map((amount) => (
                         <button 
                           key={amount}
@@ -1542,16 +1542,16 @@ export default function App() {
                             setSelectedBalanceAmount(amount);
                             setCustomBalanceAmount('');
                           }}
-                          className={`py-3 rounded-xl border text-sm font-black transition-all flex items-center justify-center gap-2 relative ${
+                          className={`py-3 rounded-lg border text-sm font-semibold transition-all flex items-center justify-center relative ${
                             selectedBalanceAmount === amount 
-                              ? 'bg-emerald-500/10 border-emerald-500 text-white' 
-                              : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:border-zinc-700'
+                              ? 'bg-transparent border-emerald-500 text-white' 
+                              : 'bg-transparent border-zinc-700 text-zinc-300 hover:border-zinc-600'
                           }`}
                         >
-                          ${amount}
+                          R${amount}
                           {selectedBalanceAmount === amount && (
-                            <div className="absolute top-2 right-2 w-4 h-4 bg-emerald-500 rounded-full flex items-center justify-center">
-                              <Check size={10} className="text-black font-bold" />
+                            <div className="absolute top-1 right-1 w-4 h-4 bg-emerald-500 rounded-full flex items-center justify-center">
+                              <Check size={10} className="text-white" />
                             </div>
                           )}
                         </button>
@@ -1559,7 +1559,7 @@ export default function App() {
                     </div>
                     
                     <div className="relative">
-                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 font-bold">$</span>
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 text-sm">R$</span>
                       <input 
                         type="text" 
                         value={customBalanceAmount}
@@ -1567,82 +1567,80 @@ export default function App() {
                           setCustomBalanceAmount(e.target.value);
                           setSelectedBalanceAmount(null);
                         }}
-                        placeholder="Custom amount"
-                        className="w-full bg-zinc-900 border border-zinc-800 rounded-xl py-4 pl-8 pr-6 text-sm font-medium text-white outline-none focus:border-zinc-700 transition-all"
+                        placeholder="Valor personalizado"
+                        className="w-full bg-transparent border border-emerald-500 rounded-lg py-3 pl-9 pr-10 text-sm text-white placeholder:text-zinc-600 outline-none transition-all"
                       />
+                      <div className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500">
+                        <Wallet size={16} />
+                      </div>
                     </div>
                   </div>
 
                   {/* Payment Method */}
-                  <div className="space-y-4 mb-10">
-                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">Payment Method</p>
+                  <div className="space-y-3 mb-6">
+                    <p className="text-sm font-medium text-white">Forma de Pagamento</p>
                     <div className="space-y-2">
                        <button 
                         onClick={() => setPaymentMethod('card')}
-                        className={`w-full p-4 rounded-2xl border transition-all flex items-center gap-4 ${
+                        className={`w-full p-3 rounded-xl border transition-all flex items-center gap-3 ${
                           paymentMethod === 'card' 
-                            ? 'bg-emerald-500/5 border-emerald-500/30' 
-                            : 'bg-zinc-900/50 border-zinc-800'
+                            ? 'bg-zinc-800/50 border-zinc-700' 
+                            : 'bg-zinc-800/30 border-zinc-800 hover:border-zinc-700'
                         }`}
                        >
-                         <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${paymentMethod === 'card' ? 'bg-emerald-500 text-black' : 'bg-zinc-800 text-zinc-500'}`}>
-                           <CreditCard size={20} />
+                         <div className="w-8 h-8 rounded-lg bg-blue-500 flex items-center justify-center">
+                           <CreditCard size={16} className="text-white" />
                          </div>
-                         <div className="flex-1 text-left">
-                            <div className="flex items-center gap-2">
-                              <span className={`text-sm font-bold ${paymentMethod === 'card' ? 'text-white' : 'text-zinc-400'}`}>Credit Card</span>
-                              <span className="bg-rose-500/20 text-rose-500 text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-md">Popular</span>
-                            </div>
+                         <div className="flex-1 text-left flex items-center gap-2">
+                            <span className="text-sm font-medium text-white">Cartao de Credito</span>
+                            <span className="bg-rose-500 text-white text-[10px] font-semibold px-2 py-0.5 rounded">Popular</span>
                          </div>
-                         {paymentMethod === 'card' && <div className="w-2 h-2 rounded-full bg-emerald-500"></div>}
                        </button>
 
                        <button 
                         onClick={() => setPaymentMethod('razorpay')}
-                        className={`w-full p-4 rounded-2xl border transition-all flex items-center gap-4 ${
+                        className={`w-full p-3 rounded-xl border transition-all flex items-center gap-3 ${
                           paymentMethod === 'razorpay' 
-                            ? 'bg-emerald-500/5 border-emerald-500/30' 
-                            : 'bg-zinc-900/50 border-zinc-800'
+                            ? 'bg-zinc-800/50 border-zinc-700' 
+                            : 'bg-zinc-800/30 border-zinc-800 hover:border-zinc-700'
                         }`}
                        >
-                         <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${paymentMethod === 'razorpay' ? 'bg-emerald-500 text-black' : 'bg-zinc-800 text-zinc-500'}`}>
-                           <RefreshCcw size={20} />
+                         <div className="w-8 h-8 rounded-lg bg-zinc-700 flex items-center justify-center">
+                           <span className="font-bold text-xs text-zinc-400">R</span>
                          </div>
                          <div className="flex-1 text-left">
-                            <span className={`text-sm font-bold ${paymentMethod === 'razorpay' ? 'text-white' : 'text-zinc-400'}`}>Razorpày</span>
+                            <span className="text-sm font-medium text-white">Razorpay</span>
                          </div>
-                         {paymentMethod === 'razorpay' && <div className="w-2 h-2 rounded-full bg-emerald-500"></div>}
                        </button>
 
                        <button 
                         onClick={() => setPaymentMethod('paypal')}
-                        className={`w-full p-4 rounded-2xl border transition-all flex items-center gap-4 ${
+                        className={`w-full p-3 rounded-xl border transition-all flex items-center gap-3 ${
                           paymentMethod === 'paypal' 
-                            ? 'bg-emerald-500/5 border-emerald-500/30' 
-                            : 'bg-zinc-900/50 border-zinc-800'
+                            ? 'bg-zinc-800/50 border-zinc-700' 
+                            : 'bg-zinc-800/30 border-zinc-800 hover:border-zinc-700'
                         }`}
                        >
-                         <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${paymentMethod === 'paypal' ? 'bg-emerald-500 text-black' : 'bg-zinc-800 text-zinc-500'}`}>
-                           <span className="font-bold text-xs">P</span>
+                         <div className="w-8 h-8 rounded-lg bg-zinc-700 flex items-center justify-center">
+                           <span className="font-bold text-xs text-zinc-400">P</span>
                          </div>
                          <div className="flex-1 text-left">
-                            <span className={`text-sm font-bold ${paymentMethod === 'paypal' ? 'text-white' : 'text-zinc-400'}`}>PayPal</span>
+                            <span className="text-sm font-medium text-white">PayPal</span>
                          </div>
-                         {paymentMethod === 'paypal' && <div className="w-2 h-2 rounded-full bg-emerald-500"></div>}
                        </button>
                     </div>
                   </div>
 
                   {/* Submit Area */}
-                  <div className="space-y-4">
-                    <button className="w-full py-4 bg-emerald-500 hover:bg-emerald-600 text-black rounded-2xl font-black transition-all flex items-center justify-center gap-3 text-xs uppercase tracking-widest shadow-xl shadow-emerald-500/20">
-                      <Wallet size={16} />
-                      Pay ${selectedBalanceAmount || customBalanceAmount || '0'}.00 Securely
+                  <div className="space-y-3">
+                    <button className="w-full py-3.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-semibold transition-all flex items-center justify-center gap-2 text-sm">
+                      <CreditCard size={16} />
+                      Pagar R${selectedBalanceAmount || customBalanceAmount || '0'},00 com Seguranca
                     </button>
                     
-                    <div className="flex items-center justify-center gap-2 text-[10px] text-emerald-500 font-bold uppercase tracking-widest">
+                    <div className="flex items-center justify-center gap-2 text-xs text-emerald-500">
                       <ShieldCheck size={14} />
-                      Protected by bank-grade encryption & fraud prevention.
+                      <span>Protegido por criptografia bancaria e prevencao de fraudes.</span>
                     </div>
                   </div>
                 </div>
