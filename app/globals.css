@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-brand: #e11d48;
+  --color-brand-hover: #be123c;
+  
+  --color-bg-darker: #0a0a0a;
+  --color-bg-card: #141414;
+  --color-bg-input: #1a1a1a;
+  --color-border-subtle: #262626;
+  
+  --color-onboarding-primary: #8b2c3a;
+  --color-onboarding-primary-hover: #72242f;
+  
+  --color-onboarding-accent: #e11d48;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-bg-darker);
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: var(--font-sans);
+  }
+}
+
+@layer utilities {
+  .step-line {
+    height: 0.25rem;
+    flex: 1 1 0%;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 500ms;
+    background-color: var(--color-zinc-800);
+  }
+  .step-line-active {
+    background-color: var(--color-onboarding-accent);
+  }
+}
